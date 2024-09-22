@@ -66,3 +66,35 @@ const placeOrder = (costumerName, orderedItems) =>
     };
     orders.push(newOrder); // Add the new order to the orders array
 }
+
+const completeOrder = (costumerName) => {
+    // Find the order by customer name
+    let order = orders.find(order => order.customerName === customerName);
+  
+    // If order is found, change its status to "Completed"
+    if (order) {
+      order.status = "Completed";
+      console.log(`Order for ${customerName} has been marked as Completed.`);
+    } else {
+      // If no order is found, log an error message
+      console.log(`Error: Order for ${customerName} not found.`);
+    }
+  };
+
+  const checkPendingOrders = () => {
+    let hasPendingOrders = false; // Track if there are pending orders
+  
+    // Iterate over all orders
+    for (let order of orders) {
+      if (order.status === "Pending") {
+        hasPendingOrders = true;
+        console.log(`Pending Order for ${order.customerName}:`);
+        console.log(order.items);
+      }
+    }
+  
+    // If no pending orders are found
+    if (!hasPendingOrders) {
+      console.log("No pending orders found.");
+    }
+  };
